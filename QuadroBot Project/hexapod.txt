@@ -1,0 +1,110 @@
+#include <Wire.h>
+#include <Multiservo.h>
+ 
+Multiservo myservo0;
+Multiservo myservo1; 
+Multiservo myservo2;
+Multiservo myservo3; 
+Multiservo myservo6;
+Multiservo myservo7; 
+Multiservo myservo8;
+Multiservo myservo9;
+int pos = 0;  
+ char b;
+void setup(void)
+{
+	Serial.begin(9600);
+  Wire.begin();
+  myservo0.attach(0);
+  myservo1.attach(1);
+ myservo2.attach(2);
+  myservo3.attach(3);
+ myservo6.attach(6);
+ myservo7.attach(7);
+ myservo8.attach(8);
+ myservo9.attach(9);//calibration
+ myservo0.write(110);
+myservo2.write(70);
+myservo6.write(110);
+myservo8.write(70);//1st legs
+myservo3.write(60);
+myservo1.write(110);
+myservo7.write(110);
+myservo9.write(60);//stab position
+delay(5000);
+Serial.println("OK");
+}
+ 
+void loop(void)
+{
+	if(Serial.available()){
+		b=Serial.read();//Serial connection
+		if (b=='w'){
+{
+	//myservo0.write(80);//myservo2.write(80);
+myservo0.write(100);
+myservo2.write(80);
+myservo6.write(100);
+myservo8.write(80);//1st leg
+myservo1.write(130);
+myservo3.write(60);
+myservo7.write(60);
+myservo9.write(110);
+//myservo8.write(90);//myservo9.write(50);
+}
+delay(300);
+
+{
+	//myservo0.write(100);
+//myservo2.write(100);
+myservo0.write(80);
+myservo2.write(100);
+myservo6.write(80);
+myservo8.write(100);
+myservo1.write(60);
+myservo3.write(130);
+myservo7.write(110);
+myservo9.write(60);
+//myservo8.write(70);//myservo9.write(90);
+}
+delay(300);
+}
+  
+  if (b=='e')
+  {
+  	{
+    myservo0.write(100);
+myservo2.write(80);
+myservo6.write(100);
+myservo8.write(80);
+
+myservo3.write(60);
+myservo1.write(110);
+myservo7.write(110);
+myservo9.write(60);//stab position
+  	
+}
+}
+}
+}
+/*
+myservo6.write(100);
+myservo7.write(100);
+myservo8.write(80);
+myservo9.write(80);
+delay(100);
+
+myservo6.write(90);
+myservo7.write(90);
+myservo8.write(70);
+myservo9.write(70);
+*/
+/*myservo6.write(90);
+myservo7.write(60);
+//this is stab pos
+myservo8.write(9v0);
+myservo9.write(60);//2 nd
+myservo0.write(90);
+myservo1.write(60);//3rd
+myservo2.write(90);
+myservo3.write(60);*/
